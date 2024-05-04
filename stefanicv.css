@@ -1,0 +1,8 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background:linear-gradient(to right, rgb(133, 89, 145), rgb(214, 211, 212)); 
+    overflow-y: scroll;
+}
+

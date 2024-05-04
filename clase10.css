@@ -1,0 +1,59 @@
+body{
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    
+}
+.btn{
+    border-radius: 50%;
+    background-color: rgb(212, 151, 212);
+    border: 0;
+    color: black;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    transition: all;
+    transition-timing-function: ease;
+    transition-duration: 100ms;
+    position: absolute;
+}
+
+.btn:hover{
+    opacity: 0.5;
+}
+
+.hamburguesa{
+    width: 50%;
+}
+
+.hamburguesa,
+.hamburguesa::after,
+.hamburguesa::before{
+    display: block;
+    margin: 0 auto;
+    background-color: black;
+    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition: all;
+    height: 2px;
+}
+.hamburguesa::after,
+.hamburguesa::before{
+    width: 100%;
+    content: '';
+}
+.hamburguesa::after{
+    transform: translateY(2px);
+}
+.hamburguesa::before{
+transform: translateY(-4px);
+}
+.btn:focus .hamburguesa{
+transform: rotate(45deg);
+}
+.btn:focus .hamburguesa::after{
+    width: 0%;
+}
+.btn:focus .hamburguesa::before{
+transform: rotate(90deg);
+}
