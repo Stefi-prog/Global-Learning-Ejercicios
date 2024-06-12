@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function validatePasswords() {
+        const password1 = document.getElementById("password1").value;
+        const password2 = document.getElementById("password2").value;
+        const password1Error = document.getElementById("password1Error");
+        const password2Error = document.getElementById("password2Error");
+
+        // Verifica si los elementos existen antes de continuar
+        if (!password1Error || !password2Error) {
+            return;
+        }
+
+        const containsNumber = /\d/.test(password1);
+        const containsUpperCase = /[A-Z]/.test(password1);
+        const containsSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password1);
+        
+        password1Error.textContent = "";
+        password2Error.textContent = "";
+
+        if (password1 !== password2) {
+            password2Error.textContent = "Las contraseñas no coinciden";
+        }
+
+        if (!containsNumber || !containsUpperCase || !containsSpecialChar || password1.length < 8) {
+            password1Error.textContent = "La contraseña debe contener 8 caracteres, una mayúscula, un número y un carácter especial";
+        }
+    }
+
     document.getElementById('firstName').addEventListener('input', function() {
         const firstName = this.value.trim();
         const firstNameError = document.getElementById('firstNameError');
@@ -22,37 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
             lastNameError.textContent = '';
         }
     });
+
     const usernameInput = document.querySelector('input[type="text"]');
     usernameInput.addEventListener('input', function() {
-        const username = this.value.trim();
-        const usernameError = document.getElementById('usernameError');
-        if (username === '') {
-            usernameError.textContent = 'Campo requerido';
-        } else {
-            usernameError.textContent = '';
-        }
-    });
-
-    function validatePasswords() {
-        const password1 = document.getElementById("password1").value;
-        const password2 = document.getElementById("password2").value;
-        const password1Error = document.getElementById("password1Error");
-        const password2Error = document.getElementById("password2Error");
-        const containsNumber = /\d/.test(password1);
-        const containsUpperCase = /[A-Z]/.test(password1);
-        const containsSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password1);
-        
-        password1Error.textContent = "";
-        password2Error.textContent = "";
-
-        if (password1 !== password2) {
-            password2Error.textContent = "Las contraseñas no coinciden";
-        }
-
-        if (!containsNumber || !containsUpperCase || !containsSpecialChar || password1.length < 8) {
-            password1Error.textContent = "La contraseña contener 8 caracteres,una mayúscula,un número y un carácter especial";
-        }
+    const username = this.value.trim();
+    const usernameError = document.getElementById('usernameError');
+    if (username === '') {
+        usernameError.textContent = 'Campo requerido';
+    } else {
+        usernameError.textContent = ''; 
     }
+
 
     const passwordInputs = document.querySelectorAll('input[type="password"]');
     passwordInputs.forEach(function(input) {
@@ -69,10 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const password2Error = document.getElementById('password2Error').textContent;
 
         if (firstNameError || lastNameError || usernameError || password1Error || password2Error) {
-            
             alert('Por favor, completa todos los campos correctamente.');
         } else {
-            
             const formData = {
                 firstName: document.getElementById('firstName').value.trim(),
                 lastName: document.getElementById('lastName').value.trim(),
@@ -85,5 +90,5 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('formData', JSON.stringify(formData));
             alert('¡Los datos han sido guardados en el localStorage!');
         }
-    });
-});
+    })
+}) })
